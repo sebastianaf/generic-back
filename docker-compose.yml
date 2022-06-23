@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  org-project-app:
+    container_name: org-project-app
+    restart: always
+    environment:
+      API_PORT: ${API_PORT}
+      API_TOKEN: ${API_TOKEN}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      TZ: ${TZ}
+    build:
+      context: ./api
+      dockerfile: org-project.Dockerfile
+      args:
+        API_PORT: ${API_PORT}
+#    ports: #uncomment both lines in case of util
+#      - 8080:${API_PORT}
+    networks:
+      - org-project
+
+  org-project-duckdns:
+    container_name: org-project-duckdns
+    restart: always
+    image: ghcr.io/linuxserver/duckdns
+    environment:
+      PUID: ${PUID}
+      PGID: ${PGID}
+      TZ: ${TZ}
+      SUBDOMAINS: ${SUBDOMAINS}
+      DUCKDNS_TOKEN: ${DUCKDNS_TOKEN}
+      LOG_FILE: ${LOG_FILE}
+    networks:
+      - org-project
+
+  org-project-db:
+    container_name: org-project-db
+    restart: always
+    image: mariadb:latest
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TZ: ${TZ}
+    volumes:
+      - ../db:/var/lib/mysql
+    networks:
+      - org-project
+
+  org-project-phpmyadmin:
+    container_name: org-project-phpmyadmin
+    restart: always
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: org-project-db
+      UPLOAD_LIMIT: 200M
+    depends_on:
+      - org-project-db
+#    ports: #uncomment both lines in case of util
+#      - 8081:80
+    networks:
+      - org-project
+
+networks:
+  org-project:
+    name: org-project
