@@ -35,7 +35,22 @@ MYSQL_HOST=
 Is recommend to change all the names in files and lines (e.g. in `docker-compose.yml` services and `.Dockerfile` prefix) named with `org` and `project` with your own organization name and project name.
 
 ### 3.Setting up a reverse proxy (Optional)
-The `docker-compose.yml` file will deploy two services to work with a home serving environment. If you don`t have a static public IP we highly recommend to use this API service behind a reverse proxy e.g. [ngix-proxy-manager](https://nginxproxymanager.com/) with [DuckDNS](www.duckdns.org) and to configure your port Forwarding ISP modem.
+The `docker-compose.yml` file will deploy two services and a docker network to work with a home serving environment and a reverse proxy setup. If you don`t have a static public IP we highly recommend to use this API service behind a reverse proxy e.g. [ngix-proxy-manager](https://nginxproxymanager.com/) with [DuckDNS](www.duckdns.org) and to configure your port Forwarding ISP modem.
+
+Make sure to include the reverse proxy container into the project network using the following setup in the reverse proxy `docker-compose.yml` file
+```
+version: "3.8"
+    services:
+    .
+    .
+    .
+
+networks:
+  org-proxy:
+    name: org-proxy
+  org-project:
+    external: true
+```
 
 ### Deploy
 At the end just type
