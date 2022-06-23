@@ -4,12 +4,12 @@ This is a quickstart code to build backend services from scratch to any project,
 ## Requirements
 This code is built using NodeJS with ExpressJS and other packages (please see the `package.json` for more info).
 
-To run this project is required [Docker](https://docs.docker.com/).
+To run this project make sure to install [Docker](https://docs.docker.com/).
 
-Make sure to follow the next steps.
+Now let's follow the next steps.
 
-### Create environment variables
-Create a `.env` file with the environment variables below, this variables will be use by the containers.
+### 1.Create environment variables
+Create a `.env` file with the environment variables below, this variables will be used by the containers.
 ```
 #org-project-api
 API_PORT=
@@ -31,24 +31,23 @@ MYSQL_DATABASE=
 MYSQL_HOST=
 ```
 
-### Change `org` and `project` names
-We recommend to change all the names in files and lines (e.g. in `docker-compose.yml` services and `.Dockerfile` prefix) named with `org` and `project` with your own organization name and project name.
+### 2.Change `org` and `project` names
+Is recommend to change all the names in files and lines (e.g. in `docker-compose.yml` services and `.Dockerfile` prefix) named with `org` and `project` with your own organization name and project name.
 
-### Setting up a reverse proxy (Optional)
+### 3.Setting up a reverse proxy (Optional)
 The `docker-compose.yml` file will deploy two services to work with a home serving environment. If you don`t have a static public IP we highly recommend to use this API service behind a reverse proxy e.g. [ngix-proxy-manager](https://nginxproxymanager.com/) with [DuckDNS](www.duckdns.org) and to configure your port Forwarding ISP modem.
 
 ### Deploy
 At the end just type
 ```
-docker compose -p <org>-<project> -up -d --build
+docker compose -p org-project -up -d --build
 ```
-This comands wake up the server access it thought port especified on `API_PORT` environment variable.
+This commands wake up the server access it thought port specified in `API_PORT` environment variable.
 
 ## Folder contents
 
 ```
-Peding
-
+See the repo content.
 ```
 
 
