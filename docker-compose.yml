@@ -7,10 +7,9 @@ services:
     environment:
       API_PORT: ${API_PORT}
       API_TOKEN: ${API_TOKEN}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
       TZ: ${TZ}
     build:
       context: ./api
@@ -39,25 +38,24 @@ services:
   org-project-db:
     container_name: org-project-db
     restart: always
-    image: mariadb:latest
+    image: postgres:latest
     environment:
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
       TZ: ${TZ}
     volumes:
-      - ../db:/var/lib/mysql
+      - ../db:/var/lib/postgresql/data
     networks:
       - org-project
 
-  org-project-phpmyadmin:
-    container_name: org-project-phpmyadmin
+  org-project-pgadmin:
+    container_name: org-project-pgadmin
     restart: always
-    image: phpmyadmin/phpmyadmin
+    image: dpage/pgadmin4
     environment:
-      PMA_HOST: org-project-db
-      UPLOAD_LIMIT: 200M
+      PGADMIN_DEFAULT_EMAIL: ${PG_ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PG_ADMIN_PASSWORD}
     depends_on:
       - org-project-db
 #    ports: #uncomment both lines in case of util

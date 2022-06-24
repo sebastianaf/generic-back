@@ -1,5 +1,5 @@
 # genericBack
-This is a quickstart code to build backend services from scratch to any project, it contends a RESTful API template, a database service with MariaDB and a Internet home deploy preSetup all with Docker.
+This is a quickstart code to build backend services from scratch to any project, it contends a RESTful API template, a database service with Sequelize and PostgreSQL and a Internet home deploy preSetup all with Docker.
 
 ## Requirements
 This code is built using NodeJS with ExpressJS and other packages (please see the `package.json` for more info).
@@ -26,11 +26,11 @@ DUCKDNS_TOKEN=
 LOG_FILE=true #optional
 
 #org-project-db and org-project-api
-MYSQL_USER=
-MYSQL_PASSWORD=
-MYSQL_ROOT_PASSWORD=
-MYSQL_DATABASE=
-MYSQL_HOST=
+DB_USER=
+DB_PASSWORD=
+DB_DATABASE=
+DB_HOST=
+DB_PORT=
 ```
 
 ### 2.Change `org` and `project` names
