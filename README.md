@@ -14,6 +14,7 @@ Create a `.env` file with the environment variables below, this variables will b
 #org-project-api
 API_PORT=
 API_TOKEN=
+API_CLIENT=
 
 #org-project-duckdns just in case to Internet deploy
 PUID=1000 #optional
