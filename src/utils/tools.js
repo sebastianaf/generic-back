@@ -1,10 +1,11 @@
-import fs from 'fs'
-import path from 'path'
-import mysql from "mysql"
+import fs from "fs";
+import path from "path";
+import mysql from "mysql";
 
 import { dbOptions } from "../config/db";
+import { logOptions } from "../config/log";
 
-require('dotenv').config()
+require("dotenv").config();
 
 //Solo ejecutar depués de conectar
 const execQuery = (SQLquery) => {
@@ -25,13 +26,13 @@ const verifyReq = async (req, res, callback) => {
   try {
     let token = req.headers.authorization;
     if (token) {
-      if (token===process.env.API_TOKEN) {
+      if (token === process.env.API_TOKEN) {
         await callback(token);
       } else {
-        res.send({error:"BAD_TOKEN"});
+        res.send({ error: "BAD_TOKEN" });
       }
     } else {
-      res.send({error:"NO_TOKEN"});
+      res.send({ error: "NO_TOKEN" });
     }
   } catch (error) {
     res.send({ error: "REQUEST_ERROR" });
@@ -57,4 +58,19 @@ const extractData = (queryData) => {
   }
 };
 
-export { execQuery, extractData, verifyReq };
+const logCheck = () => {
+  try {
+    let dir = logOptions.folderPath;
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+      fs.writeFile(logOptions.filePath, (err) => {
+        if (err) throw err;
+        console.log("Log file is created successfully.");
+      });
+    }
+  } catch (error) {
+    console.log("Log File is NOT created.");
+  }
+};
+
+export { execQuery, extractData, verifyReq, logCheck };
