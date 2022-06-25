@@ -32,7 +32,7 @@ const corsOptions = {
   },
 };
 app.use(cors(corsOptions));
-//app.use(auth);
+app.use(auth);
 app.use(express.json()); // for parsing application/json
 //app.use(express.urlencoded({ extended: true }));
 toInteger(process.env.API_LOG)
@@ -48,7 +48,7 @@ app.use(morgan(morganOptions));
 /***
  * Routes
  */
-app.get("/", auth, (req, res) => {
+app.get("/", (req, res) => {
   res.send("OK");
 });
 

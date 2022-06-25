@@ -10,8 +10,8 @@ const sequelize = new Sequelize(database, user, password, {
   host,
 });
 
-setupModels(sequelize)
+setupModels(sequelize);
 
-sequelize.sync()
+sequelize.sync();
 
-export { sequelize };
+export default sequelize;
