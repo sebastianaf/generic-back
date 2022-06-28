@@ -1,4 +1,4 @@
-# genericBack
+# generic-back
 This is a quickstart code to build backend services from scratch to any project, it contends a RESTful API template, a database service with Sequelize and PostgreSQL and a Internet home deploy preSetup all with Docker.
 
 ## Requirements
