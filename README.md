@@ -9,29 +9,7 @@ To run this project make sure to install [Docker](https://docs.docker.com/).
 Now let's follow the next steps.
 
 ### 1.Create environment variables
-Create a `.env` file with the environment variables below, this variables will be used by the containers.
-```
-#org-project-api
-API_PORT=
-API_TOKEN=
-API_CLIENT=
-API_LOG= #1 or 0
-
-#org-project-duckdns just in case to Internet deploy
-PUID=1000 #optional
-PGID=1000 #optional
-TZ=America/Bogota
-SUBDOMAINS=
-DUCKDNS_TOKEN=
-LOG_FILE=true #optional
-
-#org-project-db and org-project-api
-DB_USER=
-DB_PASSWORD=
-DB_DATABASE=
-DB_HOST=
-DB_PORT=
-```
+Create a `.env` from `.env.example` file with the environment variables, this variables will be used by the containers.
 
 ### 2.Change `org` and `project` names
 Is recommend to change all the names in files and lines (e.g. in `docker-compose.yml` services and `.Dockerfile` prefix) named with `org` and `project` with your own organization name and project name.
